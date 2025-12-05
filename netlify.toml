@@ -1,12 +1,10 @@
 [build]
   base = "web"
-  command = "npm ci --legacy-peer-deps && npm run build:ci"
+  command = "npm ci --legacy-peer-deps && npm run build"
   publish = "build"
 
 [build.environment]
-  CI = "false"
   NODE_VERSION = "18"
-  GENERATE_SOURCEMAP = "false"
 
 [[redirects]]
   from = "/*"
