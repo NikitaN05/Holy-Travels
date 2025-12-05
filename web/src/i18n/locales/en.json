@@ -1,0 +1,172 @@
+{
+  "common": {
+    "home": "Home",
+    "tours": "Tours",
+    "about": "About Us",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "My Profile",
+    "dashboard": "Dashboard",
+    "bookNow": "Book Now",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "all": "All",
+    "price": "Price",
+    "duration": "Duration",
+    "rating": "Rating",
+    "reviews": "Reviews"
+  },
+  "nav": {
+    "pilgrimage": "Pilgrimage Tours",
+    "historic": "Historic Tours",
+    "cultural": "Cultural Tours",
+    "hospitality": "Our Hospitality",
+    "myTrip": "My Trip",
+    "menu": "Today's Menu",
+    "emergency": "Emergency"
+  },
+  "hero": {
+    "title": "Sacred Journeys,",
+    "titleHighlight": "Divine Experiences",
+    "subtitle": "Embark on spiritual pilgrimages and discover India's rich cultural heritage with our expertly curated tours",
+    "cta": "Explore Tours",
+    "stats": {
+      "tours": "Tours Completed",
+      "travelers": "Happy Travelers",
+      "destinations": "Sacred Destinations",
+      "years": "Years of Service"
+    }
+  },
+  "categories": {
+    "title": "Discover Your Journey",
+    "subtitle": "Choose from our diverse range of spiritually enriching and culturally immersive tours",
+    "pilgrimage": {
+      "title": "Pilgrimage Tours",
+      "description": "Visit sacred temples, shrines, and holy places across India"
+    },
+    "historic": {
+      "title": "Historic Tours",
+      "description": "Explore ancient forts, monuments, and heritage sites"
+    },
+    "cultural": {
+      "title": "Cultural Experiences",
+      "description": "Immerse in regional traditions, art, and authentic cuisine"
+    }
+  },
+  "featured": {
+    "title": "Featured Tours",
+    "subtitle": "Our most popular spiritual and cultural journeys",
+    "viewDetails": "View Details",
+    "daysNights": "{{days}} Days / {{nights}} Nights",
+    "startingFrom": "Starting from"
+  },
+  "hospitality": {
+    "title": "Experience Our Hospitality",
+    "subtitle": "We ensure your journey is comfortable and memorable",
+    "food": {
+      "title": "Authentic Regional Cuisine",
+      "description": "Enjoy pure vegetarian meals prepared with love and traditional recipes"
+    },
+    "accommodation": {
+      "title": "Comfortable Stay",
+      "description": "Clean and comfortable accommodations at every destination"
+    },
+    "transport": {
+      "title": "Safe Transportation",
+      "description": "Well-maintained vehicles with experienced drivers"
+    },
+    "guides": {
+      "title": "Expert Guides",
+      "description": "Knowledgeable guides sharing stories and significance of each place"
+    }
+  },
+  "testimonials": {
+    "title": "What Our Travelers Say",
+    "subtitle": "Real experiences from our valued guests"
+  },
+  "menu": {
+    "title": "Today's Menu",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "snacks": "Evening Snacks",
+    "timing": "Timing",
+    "noMenu": "Menu not available for today"
+  },
+  "emergency": {
+    "title": "Emergency",
+    "helpButton": "NEED HELP?",
+    "triggerAlert": "Press to Alert",
+    "confirmTitle": "Confirm Emergency Alert",
+    "confirmMessage": "This will immediately notify our support team and your emergency contacts. Are you sure?",
+    "alertSent": "Emergency alert sent! Help is on the way.",
+    "cancelAlert": "Cancel Alert"
+  },
+  "poll": {
+    "title": "Vote for Next Destination",
+    "subtitle": "Help us choose our next tour destination",
+    "vote": "Vote",
+    "voted": "Voted",
+    "results": "Results",
+    "endsIn": "Voting ends in"
+  },
+  "profile": {
+    "title": "My Profile",
+    "personalInfo": "Personal Information",
+    "travelHistory": "Travel History",
+    "emergencyContacts": "Emergency Contacts",
+    "preferences": "Preferences",
+    "totalTrips": "Total Trips",
+    "membershipTier": "Membership Tier",
+    "loyaltyPoints": "Loyalty Points"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "loginSubtitle": "Sign in to your account",
+    "registerTitle": "Join Us",
+    "registerSubtitle": "Create your account and start your journey",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "orContinueWith": "or continue with",
+    "googleSignIn": "Continue with Google",
+    "googleSignUp": "Sign up with Google"
+  },
+  "booking": {
+    "title": "Book Your Tour",
+    "selectDate": "Select Travel Date",
+    "passengers": "Number of Travelers",
+    "totalAmount": "Total Amount",
+    "proceedPayment": "Proceed to Payment",
+    "bookingConfirmed": "Booking Confirmed!",
+    "bookingId": "Booking ID"
+  },
+  "footer": {
+    "tagline": "Your trusted partner for spiritual and cultural journeys across India",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "newsletter": "Subscribe to Newsletter",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "copyright": "© 2024 Holy Travels. All rights reserved."
+  }
+}
+
