@@ -58,7 +58,6 @@ module.exports = {
         hindi: ['Noto Sans Devanagari', 'sans-serif'],
       },
       backgroundImage: {
-        'mandala-pattern': "url('/src/assets/patterns/mandala.svg')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'temple-gradient': 'linear-gradient(135deg, #ff7f11 0%, #ed7519 50%, #de5b0f 100%)',
       },
