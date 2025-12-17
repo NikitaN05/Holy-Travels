@@ -1,0 +1,302 @@
+// Holy Travels - Prisma Schema
+// Production-ready database schema with proper relations and indexes
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum Role {
+  OWNER
+  TRAVELLER
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum TourStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum NotificationType {
+  ITINERARY_UPDATE
+  ITINERARY_REMINDER
+  EMERGENCY_ALERT
+  BOOKING_UPDATE
+  GENERAL
+}
+
+// ============================================
+// USER MODEL
+// ============================================
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(TRAVELLER)
+  
+  // Privacy-aware fields
+  fullName     String
+  displayName  String
+  phone        String?
+  avatarUrl    String?
+  
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  bookings      Booking[]
+  photos        Photo[]
+  notifications Notification[]
+  refreshTokens RefreshToken[]
+
+  @@index([email])
+  @@index([role])
+}
+
+// ============================================
+// REFRESH TOKEN MODEL
+// ============================================
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  @@index([token])
+  @@index([userId])
+}
+
+// ============================================
+// TOUR MODEL
+// ============================================
+
+model Tour {
+  id          String     @id @default(cuid())
+  title       String
+  subtitle    String?
+  description String
+  durationDays Int
+  price       Decimal    @db.Decimal(10, 2)
+  currency    String     @default("INR")
+  
+  // Locations as JSON array
+  locations   Json       @default("[]")
+  
+  // Images as JSON array of URLs
+  images      Json       @default("[]")
+  
+  // Tour details as JSON arrays
+  highlights  Json       @default("[]")
+  inclusions  Json       @default("[]")
+  exclusions  Json       @default("[]")
+  terms       String?
+  
+  maxGroupSize Int       @default(20)
+  difficulty   String    @default("moderate")
+  category     String    @default("pilgrimage")
+  
+  status      TourStatus @default(DRAFT)
+  isFeatured  Boolean    @default(false)
+  
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // Relations
+  tourDates       TourDate[]
+  itineraryItems  ItineraryItem[]
+  emergencyAlerts EmergencyAlert[]
+  photos          Photo[]
+
+  @@index([status])
+  @@index([category])
+  @@index([isFeatured])
+}
+
+// ============================================
+// TOUR DATE MODEL (Scheduled departures)
+// ============================================
+
+model TourDate {
+  id           String   @id @default(cuid())
+  tourId       String
+  tour         Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  
+  startDate    DateTime
+  endDate      DateTime
+  
+  availableSpots Int
+  bookedSpots    Int     @default(0)
+  
+  isActive     Boolean  @default(false)  // True when tour is currently running
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  bookings     Booking[]
+
+  @@index([tourId])
+  @@index([startDate])
+  @@index([isActive])
+}
+
+// ============================================
+// BOOKING MODEL
+// ============================================
+
+model Booking {
+  id           String        @id @default(cuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tourDateId   String
+  tourDate     TourDate      @relation(fields: [tourDateId], references: [id], onDelete: Cascade)
+  
+  status       BookingStatus @default(PENDING)
+  
+  numberOfTravellers Int     @default(1)
+  totalAmount        Decimal @db.Decimal(10, 2)
+  
+  // Contact info snapshot at booking time
+  contactName  String
+  contactPhone String
+  contactEmail String
+  
+  specialRequests String?
+  
+  confirmedAt  DateTime?
+  cancelledAt  DateTime?
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+  @@index([tourDateId])
+  @@index([status])
+}
+
+// ============================================
+// ITINERARY ITEM MODEL
+// ============================================
+
+model ItineraryItem {
+  id          String   @id @default(cuid())
+  tourId      String
+  tour        Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  
+  dayNumber   Int
+  title       String
+  description String?
+  
+  // Scheduled time for this item (used for notifications)
+  scheduledTime DateTime?
+  
+  location    String?
+  notes       String?
+  
+  // If true, this item triggers emergency-priority notifications
+  isEmergencyRelevant Boolean @default(false)
+  
+  // Track if notification was sent
+  notificationSent Boolean @default(false)
+  
+  sortOrder   Int      @default(0)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([tourId])
+  @@index([dayNumber])
+  @@index([scheduledTime])
+}
+
+// ============================================
+// EMERGENCY ALERT MODEL
+// ============================================
+
+model EmergencyAlert {
+  id        String   @id @default(cuid())
+  tourId    String
+  tour      Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  
+  title     String
+  message   String
+  severity  String   @default("high") // low, medium, high, critical
+  
+  isActive  Boolean  @default(true)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tourId])
+  @@index([isActive])
+}
+
+// ============================================
+// NOTIFICATION MODEL
+// ============================================
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  type      NotificationType
+  title     String
+  message   String
+  
+  // Optional reference to related entities
+  tourId    String?
+  bookingId String?
+  
+  isRead    Boolean  @default(false)
+  readAt    DateTime?
+  
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+// ============================================
+// PHOTO MODEL (Traveller uploads)
+// ============================================
+
+model Photo {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tourId    String
+  tour      Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  
+  url       String
+  publicId  String?  // Cloudinary public ID for deletion
+  caption   String?
+  
+  isApproved Boolean @default(true)  // Owner can moderate
+  
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([tourId])
+}
+
