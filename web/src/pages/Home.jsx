@@ -116,57 +116,53 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Clean & Clear */}
-      <section className="relative min-h-[90vh] flex items-center">
+      <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center bg-gray-900">
         {/* Background */}
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/2387871/pexels-photo-2387871.jpeg?auto=compress&cs=tinysrgb&w=1920"
             alt="India Travel"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-40"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/50 to-gray-900" />
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
-          >
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
+          <div className="max-w-3xl">
             {/* Badge */}
-            <div className="inline-flex items-center bg-orange-500/20 backdrop-blur-sm border border-orange-400/30 px-4 py-2 rounded-full mb-6">
-              <HiSparkles className="w-5 h-5 text-orange-400 mr-2" />
-              <span className="text-orange-200 font-medium">Trusted by 10,000+ Travelers</span>
+            <div className="inline-flex items-center bg-orange-500 px-4 py-2 rounded-full mb-6">
+              <HiSparkles className="w-5 h-5 text-white mr-2" />
+              <span className="text-white font-semibold text-sm">Trusted by 10,000+ Travelers</span>
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              Explore India's
-              <span className="block text-orange-400">Sacred & Historic</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-6">
+              Explore India's{' '}
+              <span className="text-orange-400">Sacred</span> &{' '}
+              <span className="text-orange-400">Historic</span>{' '}
               Destinations
             </h1>
 
             {/* Subheading */}
-            <p className="text-xl text-gray-200 mb-8 leading-relaxed max-w-2xl">
+            <p className="text-lg lg:text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl">
               Join our expertly curated pilgrimage and heritage tours. 
               Experience divine temples, magnificent forts, and rich cultural heritage 
               with complete comfort and safety.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 mb-12">
               <Link
                 to="/tours"
-                className="inline-flex items-center px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="inline-flex items-center px-6 lg:px-8 py-3 lg:py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-xl"
               >
                 Explore Tours
                 <HiArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <a
                 href="tel:+919876543210"
-                className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold rounded-lg hover:bg-white/20 transition-all"
+                className="inline-flex items-center px-6 lg:px-8 py-3 lg:py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-all shadow-lg"
               >
                 <HiPhone className="mr-2 w-5 h-5" />
                 Call: +91 98765 43210
@@ -174,15 +170,15 @@ const Home = () => {
             </div>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 pt-8 border-t border-white/20">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 lg:gap-8 p-4 lg:p-6 bg-white/10 backdrop-blur-sm rounded-xl">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-3xl font-bold text-orange-400">{stat.number}</div>
-                  <div className="text-gray-300 text-sm">{stat.label}</div>
+                  <div className="text-2xl lg:text-3xl font-bold text-orange-400">{stat.number}</div>
+                  <div className="text-gray-300 text-xs lg:text-sm">{stat.label}</div>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
