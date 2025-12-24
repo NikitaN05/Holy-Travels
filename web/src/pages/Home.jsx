@@ -161,11 +161,11 @@ const Home = () => {
                 <HiArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <a
-                href="tel:+919876543210"
+                href="tel:+917898360491"
                 className="inline-flex items-center px-6 lg:px-8 py-3 lg:py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-all shadow-lg"
               >
                 <HiPhone className="mr-2 w-5 h-5" />
-                Call: +91 98765 43210
+                Call: +91 78983 60491
               </a>
             </div>
 
@@ -453,7 +453,7 @@ const Home = () => {
               Browse Tours
             </Link>
             <a
-              href="tel:+919876543210"
+              href="tel:+917898360491"
               className="inline-flex items-center px-8 py-4 bg-orange-700 text-white font-bold rounded-lg hover:bg-orange-800 transition-all"
             >
               <HiPhone className="mr-2 w-5 h-5" />

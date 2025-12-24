@@ -29,29 +29,35 @@ const seedData = async () => {
     await Gallery.deleteMany({});
     console.log('🗑️ Cleared existing data');
 
-    // Create Admin User
+    // Create Admin User (Owner)
     const adminPassword = await bcrypt.hash('admin123', 10);
     const admin = await User.create({
-      name: 'Admin User',
-      email: 'admin@sacredjourneys.com',
+      name: 'Nikita Ghatode',
+      email: 'nikitaghatode7@gmail.com',
       password: adminPassword,
-      phone: '9876543210',
-      role: 'admin',
-      isVerified: true
+      phone: '7898360491',
+      role: 'super_admin',
+      address: {
+        city: 'Nagpur',
+        state: 'Maharashtra',
+        country: 'India'
+      },
+      isVerified: true,
+      phoneVerified: true
     });
-    console.log('👤 Admin created: admin@sacredjourneys.com / admin123');
+    console.log('👤 Admin created: nikitaghatode7@gmail.com / admin123');
 
     // Create Sample User
     const userPassword = await bcrypt.hash('user123', 10);
     const user = await User.create({
-      name: 'Ramesh Kumar',
-      email: 'ramesh@example.com',
+      name: 'Demo User',
+      email: 'demo@holytravels.com',
       password: userPassword,
-      phone: '9123456789',
+      phone: '9999999999',
       role: 'user',
       isVerified: true
     });
-    console.log('👤 User created: ramesh@example.com / user123');
+    console.log('👤 Demo User created: demo@holytravels.com / user123');
 
     // ========================================
     // PILGRIMAGE TOURS
@@ -1001,8 +1007,8 @@ const seedData = async () => {
 
     console.log('\n✅ Database seeded successfully!');
     console.log('\n📋 Login Credentials:');
-    console.log('   Admin: admin@sacredjourneys.com / admin123');
-    console.log('   User:  ramesh@example.com / user123');
+    console.log('   Admin: nikitaghatode7@gmail.com / admin123');
+    console.log('   Demo:  demo@holytravels.com / user123');
     console.log('\n📊 Data Summary:');
     console.log(`   - ${pilgrimageTours.length} Pilgrimage Tours`);
     console.log(`   - ${historicTours.length} Historic Tours`);

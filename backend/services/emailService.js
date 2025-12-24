@@ -103,8 +103,8 @@ const emailTemplates = {
             <div style="background: #FFF9E6; padding: 15px; border-radius: 8px; border-left: 4px solid #FFC107; margin-top: 20px;">
               <p style="margin: 0; color: #856404;">
                 <strong>📞 Need Help?</strong><br>
-                Contact us at <a href="tel:+919876543210" style="color: #FF6B35;">+91 98765 43210</a> or 
-                <a href="mailto:support@holytravels.com" style="color: #FF6B35;">support@holytravels.com</a>
+                Contact us at <a href="tel:+917898360491" style="color: #FF6B35;">+91 78983 60491</a> or 
+                <a href="mailto:nikitaghatode7@gmail.com" style="color: #FF6B35;">nikitaghatode7@gmail.com</a>
               </p>
             </div>
           </div>
