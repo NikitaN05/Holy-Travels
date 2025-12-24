@@ -62,6 +62,25 @@ const userSchema = new mongoose.Schema({
     token: String,
     platform: { type: String, enum: ['ios', 'android', 'web'] }
   }],
+  // Favorite Tours
+  favoriteTours: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tour'
+  }],
+  // OTP Login
+  phoneVerified: {
+    type: Boolean,
+    default: false
+  },
+  whatsappOptIn: {
+    type: Boolean,
+    default: false
+  },
+  // Newsletter
+  newsletterSubscribed: {
+    type: Boolean,
+    default: true
+  },
   isActive: {
     type: Boolean,
     default: true

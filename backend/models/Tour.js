@@ -67,6 +67,11 @@ const tourSchema = new mongoose.Schema({
     amount: { type: Number, required: true },
     currency: { type: String, default: 'INR' },
     discountedAmount: Number,
+    // Age-based pricing
+    adultPrice: { type: Number }, // 13+ years
+    childPrice: { type: Number }, // 3-12 years
+    infantPrice: { type: Number, default: 0 }, // 0-2 years (usually free)
+    seniorPrice: { type: Number }, // 60+ years (discounted)
     includes: [String],
     excludes: [String]
   },

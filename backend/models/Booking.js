@@ -4,8 +4,14 @@ const passengerSchema = new mongoose.Schema({
   name: String,
   age: Number,
   gender: { type: String, enum: ['male', 'female', 'other'] },
+  ageCategory: { 
+    type: String, 
+    enum: ['adult', 'child', 'infant', 'senior'],
+    default: 'adult'
+  },
   aadharNumber: String,
-  phone: String
+  phone: String,
+  price: Number // Individual passenger price based on age category
 });
 
 const bookingSchema = new mongoose.Schema({
