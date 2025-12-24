@@ -356,18 +356,72 @@ const seedData = async () => {
     await Tour.insertMany(tours);
     console.log(`🏛️ Created ${tours.length} tours`);
 
-    // Create Gallery
-    const galleryItems = [
-      { title: 'Mathura Krishna Temple', category: 'temples', imageUrl: 'https://images.pexels.com/photos/17376637/pexels-photo-17376637.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Mathura' },
-      { title: 'Somnath Temple', category: 'temples', imageUrl: 'https://images.pexels.com/photos/6064355/pexels-photo-6064355.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Gujarat' },
-      { title: 'Amber Fort Jaipur', category: 'historical', imageUrl: 'https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Jaipur' },
-      { title: 'Shirdi Sai Baba', category: 'temples', imageUrl: 'https://images.pexels.com/photos/5206729/pexels-photo-5206729.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Shirdi' },
-      { title: 'Rameshwaram Temple', category: 'temples', imageUrl: 'https://images.pexels.com/photos/17376541/pexels-photo-17376541.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Rameshwaram' },
-      { title: 'Tirupati Balaji', category: 'temples', imageUrl: 'https://images.pexels.com/photos/14661007/pexels-photo-14661007.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Tirupati' }
+    // Create Gallery Albums
+    const galleryAlbums = [
+      { 
+        title: { en: 'Mathura Vrindavan Tour', hi: 'मथुरा वृंदावन यात्रा', mr: 'मथुरा वृंदावन यात्रा' },
+        description: { en: 'Sacred journey to Krishna\'s birthplace' },
+        category: 'pilgrimage',
+        coverImage: 'https://images.pexels.com/photos/17376637/pexels-photo-17376637.jpeg?auto=compress&cs=tinysrgb&w=600',
+        photos: [
+          { url: 'https://images.pexels.com/photos/17376637/pexels-photo-17376637.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Mathura' }
+        ],
+        isPublic: true, isFeatured: true, createdBy: admin._id
+      },
+      { 
+        title: { en: 'Dwarka Somnath Pilgrimage', hi: 'द्वारका सोमनाथ तीर्थयात्रा', mr: 'द्वारका सोमनाथ तीर्थयात्रा' },
+        description: { en: 'Divine Gujarat coastal pilgrimage' },
+        category: 'pilgrimage',
+        coverImage: 'https://images.pexels.com/photos/6064355/pexels-photo-6064355.jpeg?auto=compress&cs=tinysrgb&w=600',
+        photos: [
+          { url: 'https://images.pexels.com/photos/6064355/pexels-photo-6064355.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Gujarat' }
+        ],
+        isPublic: true, isFeatured: true, createdBy: admin._id
+      },
+      { 
+        title: { en: 'Jaipur Heritage Tour', hi: 'जयपुर विरासत यात्रा', mr: 'जयपूर वारसा यात्रा' },
+        description: { en: 'Pink City forts and palaces' },
+        category: 'historic',
+        coverImage: 'https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=600',
+        photos: [
+          { url: 'https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Jaipur' }
+        ],
+        isPublic: true, isFeatured: true, createdBy: admin._id
+      },
+      { 
+        title: { en: 'Shirdi Sai Baba Darshan', hi: 'शिर्डी साईं बाबा दर्शन', mr: 'शिर्डी साईबाबा दर्शन' },
+        description: { en: 'Divine darshan at Sai Baba Temple' },
+        category: 'pilgrimage',
+        coverImage: 'https://images.pexels.com/photos/5206729/pexels-photo-5206729.jpeg?auto=compress&cs=tinysrgb&w=600',
+        photos: [
+          { url: 'https://images.pexels.com/photos/5206729/pexels-photo-5206729.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Shirdi' }
+        ],
+        isPublic: true, isFeatured: true, createdBy: admin._id
+      },
+      { 
+        title: { en: 'Rameshwaram Temple Visit', hi: 'रामेश्वरम मंदिर दर्शन', mr: 'रामेश्वरम मंदिर भेट' },
+        description: { en: 'One of the Char Dhams in South India' },
+        category: 'pilgrimage',
+        coverImage: 'https://images.pexels.com/photos/17376541/pexels-photo-17376541.jpeg?auto=compress&cs=tinysrgb&w=600',
+        photos: [
+          { url: 'https://images.pexels.com/photos/17376541/pexels-photo-17376541.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Rameshwaram' }
+        ],
+        isPublic: true, isFeatured: true, createdBy: admin._id
+      },
+      { 
+        title: { en: 'Tirupati Balaji Darshan', hi: 'तिरुपति बालाजी दर्शन', mr: 'तिरुपती बालाजी दर्शन' },
+        description: { en: 'World\'s richest temple' },
+        category: 'pilgrimage',
+        coverImage: 'https://images.pexels.com/photos/14661007/pexels-photo-14661007.jpeg?auto=compress&cs=tinysrgb&w=600',
+        photos: [
+          { url: 'https://images.pexels.com/photos/14661007/pexels-photo-14661007.jpeg?auto=compress&cs=tinysrgb&w=600', location: 'Tirupati' }
+        ],
+        isPublic: true, isFeatured: true, createdBy: admin._id
+      }
     ];
 
-    await Gallery.insertMany(galleryItems);
-    console.log('📸 Created gallery items');
+    await Gallery.insertMany(galleryAlbums);
+    console.log('📸 Created gallery albums');
 
     console.log('\n✅ ====================================');
     console.log('   DATABASE SEEDED SUCCESSFULLY!');
@@ -376,7 +430,7 @@ const seedData = async () => {
     console.log(`   - Admin: nikitaghatode7@gmail.com / admin123`);
     console.log(`   - Demo User: demo@holytravels.com / user123`);
     console.log(`   - Tours: ${tours.length}`);
-    console.log(`   - Gallery Items: ${galleryItems.length}`);
+    console.log(`   - Gallery Albums: ${galleryAlbums.length}`);
     console.log('\n🌐 Tours Added:');
     tours.forEach((t, i) => console.log(`   ${i+1}. ${t.title.en}`));
     console.log('\n');
