@@ -188,7 +188,38 @@ export default {
       }), { headers: corsHeaders });
     }
 
-    // Get single tour by slug
+    // Featured tours (MUST come before slug route)
+    if (path === "/api/tours/featured" || path === "/tours/featured") {
+      const featuredTours = tours.filter(t => t.isFeatured).slice(0, 6);
+      return new Response(JSON.stringify({
+        success: true,
+        count: featuredTours.length,
+        data: featuredTours
+      }), { headers: corsHeaders });
+    }
+
+    // Tour categories (MUST come before slug route)
+    if (path === "/api/tours/categories" || path === "/tours/categories") {
+      return new Response(JSON.stringify({
+        success: true,
+        data: [
+          { _id: "pilgrimage", name: "Pilgrimage Tours", count: 4 },
+          { _id: "mixed", name: "Mixed Tours", count: 1 },
+          { _id: "historic", name: "Historic Tours", count: 0 },
+          { _id: "cultural", name: "Cultural Tours", count: 0 }
+        ]
+      }), { headers: corsHeaders });
+    }
+
+    // Upcoming tours (MUST come before slug route)
+    if (path === "/api/tours/upcoming" || path === "/tours/upcoming") {
+      return new Response(JSON.stringify({
+        success: true,
+        data: tours.slice(0, 3)
+      }), { headers: corsHeaders });
+    }
+
+    // Get single tour by slug (MUST come LAST)
     if (path.startsWith("/api/tours/") || path.startsWith("/tours/")) {
       const slug = path.split("/").pop();
       const tour = tours.find(t => t.slug === slug || t._id === slug);
@@ -204,37 +235,6 @@ export default {
         success: false,
         message: "Tour not found"
       }), { status: 404, headers: corsHeaders });
-    }
-
-    // Featured tours
-    if (path === "/api/tours/featured" || path === "/tours/featured") {
-      const featuredTours = tours.filter(t => t.isFeatured).slice(0, 6);
-      return new Response(JSON.stringify({
-        success: true,
-        count: featuredTours.length,
-        data: featuredTours
-      }), { headers: corsHeaders });
-    }
-
-    // Tour categories
-    if (path === "/api/tours/categories" || path === "/tours/categories") {
-      return new Response(JSON.stringify({
-        success: true,
-        data: [
-          { _id: "pilgrimage", name: "Pilgrimage Tours", count: 4 },
-          { _id: "mixed", name: "Mixed Tours", count: 1 },
-          { _id: "historic", name: "Historic Tours", count: 0 },
-          { _id: "cultural", name: "Cultural Tours", count: 0 }
-        ]
-      }), { headers: corsHeaders });
-    }
-
-    // Upcoming tours
-    if (path === "/api/tours/upcoming" || path === "/tours/upcoming") {
-      return new Response(JSON.stringify({
-        success: true,
-        data: tours.slice(0, 3)
-      }), { headers: corsHeaders });
     }
 
     // Auth endpoints (mock)
