@@ -216,6 +216,27 @@ export default {
       }), { headers: corsHeaders });
     }
 
+    // Tour categories
+    if (path === "/api/tours/categories" || path === "/tours/categories") {
+      return new Response(JSON.stringify({
+        success: true,
+        data: [
+          { _id: "pilgrimage", name: "Pilgrimage Tours", count: 4 },
+          { _id: "mixed", name: "Mixed Tours", count: 1 },
+          { _id: "historic", name: "Historic Tours", count: 0 },
+          { _id: "cultural", name: "Cultural Tours", count: 0 }
+        ]
+      }), { headers: corsHeaders });
+    }
+
+    // Upcoming tours
+    if (path === "/api/tours/upcoming" || path === "/tours/upcoming") {
+      return new Response(JSON.stringify({
+        success: true,
+        data: tours.slice(0, 3)
+      }), { headers: corsHeaders });
+    }
+
     // Auth endpoints (mock)
     if (path === "/api/auth/login" || path === "/auth/login") {
       if (request.method === "POST") {

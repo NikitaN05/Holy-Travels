@@ -112,18 +112,18 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
                 <FaMapMarkerAlt className="w-5 h-5 text-saffron-500 mt-1 flex-shrink-0" />
-                <span>123 Temple Road, Spiritual Plaza<br />Mumbai, Maharashtra 400001</span>
+                <span>Nagpur, Maharashtra<br />India</span>
               </li>
               <li className="flex items-center space-x-3">
                 <FaPhone className="w-5 h-5 text-saffron-500 flex-shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-saffron-400 transition-colors">
-                  +91 98765 43210
+                <a href="tel:+917898360491" className="hover:text-saffron-400 transition-colors">
+                  +91 78983 60491
                 </a>
               </li>
               <li className="flex items-center space-x-3">
                 <FaEnvelope className="w-5 h-5 text-saffron-500 flex-shrink-0" />
-                <a href="mailto:info@holytravels.com" className="hover:text-saffron-400 transition-colors">
-                  info@holytravels.com
+                <a href="mailto:nikitaghatode7@gmail.com" className="hover:text-saffron-400 transition-colors">
+                  nikitaghatode7@gmail.com
                 </a>
               </li>
             </ul>

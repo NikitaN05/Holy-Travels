@@ -15,10 +15,10 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: HiPhone, label: 'Phone', value: '+91 98765 43210', href: 'tel:+919876543210' },
-    { icon: FaWhatsapp, label: 'WhatsApp', value: '+91 98765 43210', href: 'https://wa.me/919876543210' },
-    { icon: HiMail, label: 'Email', value: 'info@holytravels.com', href: 'mailto:info@holytravels.com' },
-    { icon: HiLocationMarker, label: 'Address', value: '123 Temple Road, Spiritual Plaza, Mumbai 400001' }
+    { icon: HiPhone, label: 'Phone', value: '+91 78983 60491', href: 'tel:+917898360491' },
+    { icon: FaWhatsapp, label: 'WhatsApp', value: '+91 78983 60491', href: 'https://wa.me/917898360491' },
+    { icon: HiMail, label: 'Email', value: 'nikitaghatode7@gmail.com', href: 'mailto:nikitaghatode7@gmail.com' },
+    { icon: HiLocationMarker, label: 'Address', value: 'Nagpur, Maharashtra, India' }
   ];
 
   const officeHours = [
