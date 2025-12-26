@@ -242,13 +242,13 @@ const Tours = () => {
               </div>
             ))}
           </div>
-        ) : (data?.tours?.length > 0 || (Array.isArray(data) && data.length > 0)) ? (
+        ) : (data && (Array.isArray(data) ? data.length > 0 : data?.tours?.length > 0)) ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {(data?.tours || data).map((tour, index) => (
+            {(Array.isArray(data) ? data : data?.tours || []).map((tour, index) => (
               <motion.div
                 key={tour._id}
                 initial={{ opacity: 0, y: 20 }}
