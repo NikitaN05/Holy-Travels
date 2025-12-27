@@ -14,6 +14,80 @@ import {
 } from 'react-icons/hi';
 import { toursAPI } from '../services/api';
 
+// Fallback tours data - shows when API is unavailable
+const FALLBACK_TOURS = [
+  {
+    _id: "1",
+    title: { en: "Mathura Vrindavan Divine Yatra", hi: "मथुरा वृंदावन दिव्य यात्रा" },
+    slug: "mathura-vrindavan-yatra",
+    shortDescription: { en: "Sacred journey to Krishna's birthplace - Mathura & Vrindavan temples" },
+    category: "pilgrimage",
+    duration: { days: 3, nights: 2 },
+    price: { amount: 6500, currency: "INR", discountedAmount: 5500 },
+    isActive: true,
+    isFeatured: true,
+    averageRating: 4.8,
+    totalReviews: 245,
+    images: [{ url: "https://images.pexels.com/photos/17376637/pexels-photo-17376637.jpeg?auto=compress&cs=tinysrgb&w=800", caption: "Banke Bihari Temple", isMain: true }]
+  },
+  {
+    _id: "2",
+    title: { en: "Dwarka Somnath Divine Darshan", hi: "द्वारका सोमनाथ दिव्य दर्शन" },
+    slug: "dwarka-somnath-darshan",
+    shortDescription: { en: "Sacred pilgrimage to Lord Krishna's Dwarka and first Jyotirlinga Somnath" },
+    category: "pilgrimage",
+    duration: { days: 5, nights: 4 },
+    price: { amount: 15000, currency: "INR", discountedAmount: 13500 },
+    isActive: true,
+    isFeatured: true,
+    averageRating: 4.9,
+    totalReviews: 189,
+    images: [{ url: "https://images.pexels.com/photos/6064355/pexels-photo-6064355.jpeg?auto=compress&cs=tinysrgb&w=800", caption: "Somnath Temple", isMain: true }]
+  },
+  {
+    _id: "3",
+    title: { en: "Jaipur & Khatu Shyam Ji Darshan", hi: "जयपुर और खाटू श्याम जी दर्शन" },
+    slug: "jaipur-khatu-shyam-darshan",
+    shortDescription: { en: "Pink City Jaipur heritage tour with Khatu Shyam Ji Temple darshan" },
+    category: "mixed",
+    duration: { days: 4, nights: 3 },
+    price: { amount: 9500, currency: "INR", discountedAmount: 8500 },
+    isActive: true,
+    isFeatured: true,
+    averageRating: 4.7,
+    totalReviews: 156,
+    images: [{ url: "https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=800", caption: "Amber Fort Jaipur", isMain: true }]
+  },
+  {
+    _id: "4",
+    title: { en: "Nashik Shirdi Shani Shingnapur Yatra", hi: "नासिक शिर्डी शनि शिंगणापुर यात्रा" },
+    slug: "nashik-shirdi-shani-shingnapur",
+    shortDescription: { en: "Divine Maharashtra tour - Trimbakeshwar, Shirdi Sai Baba & Shani Shingnapur" },
+    category: "pilgrimage",
+    duration: { days: 4, nights: 3 },
+    price: { amount: 7500, currency: "INR", discountedAmount: 6500 },
+    isActive: true,
+    isFeatured: true,
+    averageRating: 4.9,
+    totalReviews: 312,
+    images: [{ url: "https://images.pexels.com/photos/5206729/pexels-photo-5206729.jpeg?auto=compress&cs=tinysrgb&w=800", caption: "Shirdi Sai Baba Temple", isMain: true }]
+  },
+  {
+    _id: "5",
+    title: { en: "Rameshwaram & Balaji Puram Yatra", hi: "रामेश्वरम और बालाजी पुरम यात्रा" },
+    slug: "rameshwaram-balaji-puram-tirupati",
+    shortDescription: { en: "Complete South India pilgrimage - Rameshwaram Char Dham & Tirupati Balaji" },
+    category: "pilgrimage",
+    duration: { days: 7, nights: 6 },
+    price: { amount: 22000, currency: "INR", discountedAmount: 19500 },
+    isActive: true,
+    isFeatured: true,
+    averageRating: 4.9,
+    totalReviews: 278,
+    images: [{ url: "https://images.pexels.com/photos/17376541/pexels-photo-17376541.jpeg?auto=compress&cs=tinysrgb&w=800", caption: "Ramanathaswamy Temple", isMain: true }]
+  }
+];
+
 const Tours = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
@@ -29,11 +103,19 @@ const Tours = () => {
   });
   const [showFilters, setShowFilters] = useState(false);
 
-  const { data, isLoading } = useQuery(
+  const { data: apiData, isLoading, isError } = useQuery(
     ['tours', filters],
-    () => toursAPI.getAll(filters).then(res => res.data.data),
-    { keepPreviousData: true }
+    () => toursAPI.getAll(filters).then(res => res.data?.data || res.data),
+    { 
+      keepPreviousData: true,
+      retry: 2,
+      retryDelay: 1000,
+      onError: (err) => console.log('API Error, using fallback data:', err.message)
+    }
   );
+
+  // Use API data if available, otherwise use fallback
+  const data = (apiData && (Array.isArray(apiData) ? apiData.length > 0 : true)) ? apiData : FALLBACK_TOURS;
 
   const { data: categories } = useQuery('tourCategories', () =>
     toursAPI.getCategories().then(res => res.data.data)
@@ -242,13 +324,13 @@ const Tours = () => {
               </div>
             ))}
           </div>
-        ) : (data && (Array.isArray(data) ? data.length > 0 : data?.tours?.length > 0)) ? (
+        ) : (Array.isArray(data) && data.length > 0) ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {(Array.isArray(data) ? data : data?.tours || []).map((tour, index) => (
+            {data.map((tour, index) => (
               <motion.div
                 key={tour._id}
                 initial={{ opacity: 0, y: 20 }}
